@@ -16,8 +16,6 @@ import { useGetSystemAppConfig } from '@/libs/hooks/useGetSystemAppConfig';
 import { cn } from '@/libs/utils';
 import { MagicWandIcon, SymbolIcon } from '@radix-ui/react-icons';
 import { nanoid } from 'nanoid';
-import { useTheme } from 'next-themes';
-import Image from 'next/image';
 import {
   ReadonlyURLSearchParams,
   useRouter,
@@ -49,7 +47,6 @@ export default function NewJob(props: PageProps): ReactElement {
 
   const router = useRouter();
   const posthog = usePostHog();
-  const theme = useTheme();
 
   return (
     <div
@@ -74,23 +71,8 @@ export default function NewJob(props: PageProps): ReactElement {
             >
               <CardHeader className="w-[300px] relative">
                 <div className="flex flex-col items-center text-left">
-                  <div className="relative">
-                    <Image
-                      src={jd.image}
-                      alt="image"
-                      width="200"
-                      height="200"
-                    />
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background:
-                          theme.resolvedTheme == 'light'
-                            ? 'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 5%, rgba(255,255,255,0) 100%)'
-                            : 'linear-gradient(to top, rgba(30,30,36,1) 0%, rgba(30,30,36,1) 5%, rgba(30,30,36,0) 100%)',
-                        pointerEvents: 'none',
-                      }}
-                    />
+                  <div className="flex h-[140px] w-[200px] items-center justify-center rounded-lg bg-muted text-muted-foreground [&>svg]:h-16 [&>svg]:w-16">
+                    {jd.icon}
                   </div>
                   <div className="pt-8">
                     <CardTitle>
@@ -152,7 +134,6 @@ interface JobData {
   icon: ReactNode;
   type: NewJobType;
   experimental: boolean;
-  image: string;
 }
 
 function useGetJobData(
@@ -162,7 +143,6 @@ function useGetJobData(
   const [sessionToken] = useState<string>(params?.sessionId ?? nanoid());
   const { account } = useAccount();
   const { data: systemAppConfig } = useGetSystemAppConfig();
-  const { resolvedTheme } = useTheme();
 
   const dataSyncParams = new URLSearchParams(searchParams);
   dataSyncParams.set('jobType', 'data-sync');
@@ -196,10 +176,6 @@ function useGetJobData(
       icon: <SymbolIcon />,
       type: 'data-sync',
       experimental: false,
-      image:
-        resolvedTheme === 'light'
-          ? 'https://assets.nucleuscloud.com/neosync/app/jobsynclight.svg'
-          : 'https://assets.nucleuscloud.com/neosync/app/prodsync-dark.svg',
     },
     {
       name: 'Data Generation',
@@ -209,10 +185,6 @@ function useGetJobData(
       icon: <AiOutlineExperiment />,
       type: 'generate-table',
       experimental: false,
-      image:
-        resolvedTheme === 'light'
-          ? 'https://assets.nucleuscloud.com/neosync/app/gen-light.svg'
-          : 'https://assets.nucleuscloud.com/neosync/app/datagen-dark.svg',
     },
     {
       name: 'AI Data Generation',
@@ -221,10 +193,6 @@ function useGetJobData(
       icon: <MagicWandIcon />,
       type: 'ai-generate-table',
       experimental: true,
-      image:
-        resolvedTheme === 'light'
-          ? 'https://assets.nucleuscloud.com/neosync/app/aigen.svg'
-          : 'https://assets.nucleuscloud.com/neosync/app/aigen-dark.svg',
     },
   ];
 
@@ -237,10 +205,6 @@ function useGetJobData(
       icon: <PiDetective />,
       type: 'pii-detection',
       experimental: true,
-      image:
-        resolvedTheme === 'light'
-          ? 'https://assets.nucleuscloud.com/neosync/app/pii-detect-light.svg'
-          : 'https://assets.nucleuscloud.com/neosync/app/pii-detect-dark.svg',
     });
   }
 
