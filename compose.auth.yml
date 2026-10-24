@@ -63,7 +63,7 @@ services:
       - KC_DB_PASSWORD=foofar
       - KC_DB_SCHEMA=keycloak
     volumes:
-      - ./keycloak/imports:/opt/keycloak/data/import
+      - ./keycloak/imports:/opt/keycloak/data/import:z
     networks:
       - kc-network
     depends_on:

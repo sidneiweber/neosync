@@ -8,17 +8,17 @@
 temporal schedule create \
       --schedule-id "6638b7bf-7905-468f-8287-5c2df4732bf0" \
       --task-queue "sync-job" \
-      --workflow-type "Workflow" \
+      --type "Workflow" \
       --cron "0 0 1 1 *" \
-      --pause \
+      --paused \
       --workflow-id "6638b7bf-7905-468f-8287-5c2df4732bf0" \
       --input '{"JobId": "6638b7bf-7905-468f-8287-5c2df4732bf0"}'
 
 temporal schedule create \
       --schedule-id "2a5d5caa-7f09-4fdf-a4a7-6a2e341aa600" \
       --task-queue "sync-job" \
-      --workflow-type "Workflow" \
+      --type "Workflow" \
       --cron "0 0 1 1 *" \
-      --pause \
+      --paused \
       --workflow-id "2a5d5caa-7f09-4fdf-a4a7-6a2e341aa600" \
       --input '{"JobId": "2a5d5caa-7f09-4fdf-a4a7-6a2e341aa600"}'

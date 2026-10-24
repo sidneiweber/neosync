@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
     volumes:
-      - ../mtls:/certs
+      - ../mtls:/certs:z
     ports:
       - "5555:5432"
     user: postgres
