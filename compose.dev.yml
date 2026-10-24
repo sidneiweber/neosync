@@ -36,7 +36,7 @@ services:
     networks:
       - neosync-network
     volumes:
-      - ./frontend:/app/:rw
+      - ./frontend:/app/:rw,z
       - neosync_app_nodemodules:/app/node_modules
       - neosync_web_nodemodules:/app/apps/web/node_modules
       - neosync_sdk_nodemodules:/app/packages/sdk/node_modules
@@ -60,7 +60,7 @@ services:
       - neosync-network
     volumes:
       - neosync_pg_data:/var/lib/postgresql/data
-      - ./scripts/pg-init:/docker-entrypoint-initdb.d
+      - ./scripts/pg-init:/docker-entrypoint-initdb.d:z
 
   api:
     container_name: neosync-api
@@ -102,11 +102,11 @@ services:
         condition: service_healthy
         restart: true
     volumes:
-      - ./backend:/workspace/backend:rw
-      - ./worker:/workspace/worker:rw
-      - ./internal:/workspace/internal:rw
-      - ./go.mod:/workspace/go.mod:rw
-      - ./go.sum:/workspace/go.sum:rw
+      - ./backend:/workspace/backend:rw,z
+      - ./worker:/workspace/worker:rw,z
+      - ./internal:/workspace/internal:rw,z
+      - ./go.mod:/workspace/go.mod:rw,z
+      - ./go.sum:/workspace/go.sum:rw,z
       - neosync_api_tmp:/workspace/tmp
       - neosync_go_mod_cache:/go/pkg/mod
       - neosync_backend_build_cache:/root/.cache/go-build
@@ -138,11 +138,11 @@ services:
         condition: service_healthy
         restart: true
     volumes:
-      - ./backend:/workspace/backend:rw
-      - ./worker:/workspace/worker:rw
-      - ./internal:/workspace/internal:rw
-      - ./go.mod:/workspace/go.mod:rw
-      - ./go.sum:/workspace/go.sum:rw
+      - ./backend:/workspace/backend:rw,z
+      - ./worker:/workspace/worker:rw,z
+      - ./internal:/workspace/internal:rw,z
+      - ./go.mod:/workspace/go.mod:rw,z
+      - ./go.sum:/workspace/go.sum:rw,z
       - neosync_worker_tmp:/workspace/tmp
       - neosync_go_mod_cache:/go/pkg/mod
       - neosync_worker_build_cache:/root/.cache/go-build

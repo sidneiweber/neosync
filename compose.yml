@@ -49,7 +49,7 @@ services:
       - neosync-network
     volumes:
       - neosync_pg_data:/var/lib/postgresql/data
-      - ./scripts/pg-init:/docker-entrypoint-initdb.d
+      - ./scripts/pg-init:/docker-entrypoint-initdb.d:z
 
   api:
     container_name: neosync-api
@@ -92,8 +92,8 @@ services:
     entrypoint: >
       /bin/sh -c "./scripts/wait-for-it.sh api:8080 -- psql 'postgresql://postgres:foofar@neosync-db:5432/nucleus?sslmode=disable' -f /scripts/seed.sql"
     volumes:
-      - ./scripts/seed-neosync.sql:/scripts/seed.sql
-      - ./scripts/wait-for-it.sh:/scripts/wait-for-it.sh
+      - ./scripts/seed-neosync.sql:/scripts/seed.sql:z
+      - ./scripts/wait-for-it.sh:/scripts/wait-for-it.sh:z
     depends_on:
       - api
     networks:
@@ -106,7 +106,7 @@ services:
       - TEMPORAL_ADDRESS=temporal:7233
     entrypoint: /bin/sh -c "/create_schedules.sh"
     volumes:
-      - ./scripts/create_schedules.sh:/create_schedules.sh
+      - ./scripts/create_schedules.sh:/create_schedules.sh:z
     depends_on:
       - api
     networks:

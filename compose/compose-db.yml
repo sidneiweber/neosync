@@ -16,7 +16,7 @@ services:
     networks:
       - neosync-network
     volumes:
-      - ../scripts/seed-test-prod-db.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ../scripts/seed-test-prod-db.sql:/docker-entrypoint-initdb.d/seed.sql:z
 
   test-stage-db:
     container_name: test-stage-db
