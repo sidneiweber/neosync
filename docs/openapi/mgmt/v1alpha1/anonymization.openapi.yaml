@@ -301,6 +301,31 @@ components:
           description: An option to return the full country name of the randomly selected country or return the default of a 2-letter country code.
       title: GenerateCountry
       additionalProperties: false
+    mgmt.v1alpha1.GenerateCpf:
+      type: object
+      allOf:
+        - anyOf:
+            - required:
+                - formatted
+            - not:
+                anyOf:
+                  - required:
+                      - formatted
+      anyOf:
+        - required:
+            - formatted
+        - not:
+            anyOf:
+              - required:
+                  - formatted
+      properties:
+        formatted:
+          type: boolean
+          title: formatted
+          description: Whether to format the CPF as xxx.xxx.xxx-xx. Defaults to true. If false, returns only the 11 digits.
+      title: GenerateCpf
+      additionalProperties: false
+      description: Generates a valid Brazilian CPF (Cadastro de Pessoas Físicas) with correct check digits.
     mgmt.v1alpha1.GenerateDefault:
       type: object
       title: GenerateDefault
@@ -915,6 +940,11 @@ components:
           description: A user provided regular expression that will be used to scramble the characters in the input string. Must be a valid Golang regex.
       title: TransformCharacterScramble
       additionalProperties: false
+    mgmt.v1alpha1.TransformCpf:
+      type: object
+      title: TransformCpf
+      additionalProperties: false
+      description: Transforms an existing Brazilian CPF into a different valid CPF, keeping the input format.
     mgmt.v1alpha1.TransformE164PhoneNumber:
       type: object
       allOf:
@@ -1326,6 +1356,8 @@ components:
             - required:
                 - generateCountryConfig
             - required:
+                - generateCpfConfig
+            - required:
                 - generateDefaultConfig
             - required:
                 - generateE164PhoneNumberConfig
@@ -1380,6 +1412,8 @@ components:
             - required:
                 - transformCharacterScrambleConfig
             - required:
+                - transformCpfConfig
+            - required:
                 - transformE164PhoneNumberConfig
             - required:
                 - transformEmailConfig
@@ -1423,6 +1457,8 @@ components:
                       - generateCityConfig
                   - required:
                       - generateCountryConfig
+                  - required:
+                      - generateCpfConfig
                   - required:
                       - generateDefaultConfig
                   - required:
@@ -1478,6 +1514,8 @@ components:
                   - required:
                       - transformCharacterScrambleConfig
                   - required:
+                      - transformCpfConfig
+                  - required:
                       - transformE164PhoneNumberConfig
                   - required:
                       - transformEmailConfig
@@ -1520,6 +1558,8 @@ components:
             - generateCityConfig
         - required:
             - generateCountryConfig
+        - required:
+            - generateCpfConfig
         - required:
             - generateDefaultConfig
         - required:
@@ -1575,6 +1615,8 @@ components:
         - required:
             - transformCharacterScrambleConfig
         - required:
+            - transformCpfConfig
+        - required:
             - transformE164PhoneNumberConfig
         - required:
             - transformEmailConfig
@@ -1618,6 +1660,8 @@ components:
                   - generateCityConfig
               - required:
                   - generateCountryConfig
+              - required:
+                  - generateCpfConfig
               - required:
                   - generateDefaultConfig
               - required:
@@ -1672,6 +1716,8 @@ components:
                   - passthroughConfig
               - required:
                   - transformCharacterScrambleConfig
+              - required:
+                  - transformCpfConfig
               - required:
                   - transformE164PhoneNumberConfig
               - required:
@@ -1897,6 +1943,16 @@ components:
             - $ref: '#/components/schemas/mgmt.v1alpha1.TransformScrambleIdentity'
           title: transform_scramble_identity_config
           description: Scrambles an integer while keeping it unique.
+        generateCpfConfig:
+          allOf:
+            - $ref: '#/components/schemas/mgmt.v1alpha1.GenerateCpf'
+          title: generate_cpf_config
+          description: Generates a valid Brazilian CPF.
+        transformCpfConfig:
+          allOf:
+            - $ref: '#/components/schemas/mgmt.v1alpha1.TransformCpf'
+          title: transform_cpf_config
+          description: Transforms an existing Brazilian CPF into a different valid CPF.
       title: TransformerConfig
       additionalProperties: false
       description: The configuration for a transformer. This determines what type of transformation or generation is performed.

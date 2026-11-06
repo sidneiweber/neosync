@@ -47,6 +47,10 @@ const generateCardNumberConfig = Yup.object().shape({
   validLuhn: Yup.boolean().default(false).required('This field is required.'),
 });
 
+const generateCpfConfig = Yup.object().shape({
+  formatted: Yup.boolean().default(true),
+});
+
 const generateInternationalPhoneNumberConfig = Yup.object({
   min: getBigIntValidator({
     range: [9, 15],
@@ -437,6 +441,8 @@ const TRANSFORMER_SCHEMA_CONFIGS = {
   generateIpAddressConfig: generateIpAddressConfig,
   transformUuidConfig: EMPTY_TRANSFORMER_VALUE_CONFIG,
   transformScrambleIdentityConfig: EMPTY_TRANSFORMER_VALUE_CONFIG,
+  generateCpfConfig: generateCpfConfig,
+  transformCpfConfig: EMPTY_TRANSFORMER_VALUE_CONFIG,
 
   transformPiiTextConfig: transformPiiTextConfig,
 } as const;

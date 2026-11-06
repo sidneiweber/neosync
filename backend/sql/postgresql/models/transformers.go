@@ -59,10 +59,18 @@ type TransformerConfig struct {
 	GenerateIpAddress          *GenerateIpAddressConfig         `json:"generateIpAddressConfig,omitempty"`
 	TransformUuid              *TransformUuidConfig             `json:"transformUuid,omitempty"`
 	TransformScrambleIdentity  *TransformScrambleIdentityConfig `json:"transformScrambleIdentity,omitempty"`
+	GenerateCpf                *GenerateCpfConfig               `json:"generateCpf,omitempty"`
+	TransformCpf               *TransformCpfConfig              `json:"transformCpf,omitempty"`
 	TransformPiiText           string                           `json:"transformPiiText,omitempty"`
 }
 
 type TransformScrambleIdentityConfig struct{}
+
+type GenerateCpfConfig struct {
+	Formatted *bool `json:"formatted,omitempty"`
+}
+
+type TransformCpfConfig struct{}
 
 type GenerateEmailConfig struct {
 	EmailType *int32 `json:"emailType,omitempty"`
@@ -404,6 +412,12 @@ func (t *TransformerConfig) FromTransformerConfigDto(tr *mgmtv1alpha1.Transforme
 		t.TransformUuid = &TransformUuidConfig{}
 	case *mgmtv1alpha1.TransformerConfig_TransformScrambleIdentityConfig:
 		t.TransformScrambleIdentity = &TransformScrambleIdentityConfig{}
+	case *mgmtv1alpha1.TransformerConfig_GenerateCpfConfig:
+		t.GenerateCpf = &GenerateCpfConfig{
+			Formatted: tr.GetGenerateCpfConfig().Formatted,
+		}
+	case *mgmtv1alpha1.TransformerConfig_TransformCpfConfig:
+		t.TransformCpf = &TransformCpfConfig{}
 	case *mgmtv1alpha1.TransformerConfig_TransformPiiTextConfig:
 		bits, err := json.Marshal(tr.GetTransformPiiTextConfig())
 		if err != nil {
@@ -782,6 +796,20 @@ func (t *TransformerConfig) ToTransformerConfigDto() (*mgmtv1alpha1.TransformerC
 		return &mgmtv1alpha1.TransformerConfig{
 			Config: &mgmtv1alpha1.TransformerConfig_TransformScrambleIdentityConfig{
 				TransformScrambleIdentityConfig: &mgmtv1alpha1.TransformScrambleIdentity{},
+			},
+		}, nil
+	case t.GenerateCpf != nil:
+		return &mgmtv1alpha1.TransformerConfig{
+			Config: &mgmtv1alpha1.TransformerConfig_GenerateCpfConfig{
+				GenerateCpfConfig: &mgmtv1alpha1.GenerateCpf{
+					Formatted: t.GenerateCpf.Formatted,
+				},
+			},
+		}, nil
+	case t.TransformCpf != nil:
+		return &mgmtv1alpha1.TransformerConfig{
+			Config: &mgmtv1alpha1.TransformerConfig_TransformCpfConfig{
+				TransformCpfConfig: &mgmtv1alpha1.TransformCpf{},
 			},
 		}, nil
 	case t.TransformPiiText != "":

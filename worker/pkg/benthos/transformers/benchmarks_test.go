@@ -103,6 +103,22 @@ func BenchmarkGenerateCountry(b *testing.B) {
 }
 
 
+func BenchmarkGenerateCpf(b *testing.B) {
+	generator := NewGenerateCpf()
+	opts, err := NewGenerateCpfOpts(nil,nil,)
+	if err != nil {
+		b.Fatal(err)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_, err := generator.Generate(opts)
+		if err != nil {
+			b.Fatal(err)
+		}
+	}
+}
+
+
 func BenchmarkGenerateEmail(b *testing.B) {
 	generator := NewGenerateEmail()
 	opts, err := NewGenerateEmailOpts(nil,nil,nil,)
@@ -460,6 +476,22 @@ func BenchmarkGenerateZipcode(b *testing.B) {
 func BenchmarkTransformCharacterScramble(b *testing.B) {
 	transformer := NewTransformCharacterScramble()
 	opts, err := NewTransformCharacterScrambleOpts(nil,nil,)
+	if err != nil {
+		b.Fatal(err)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_, err := transformer.Transform("test", opts)
+		if err != nil {
+			b.Fatal(err)
+		}
+	}
+}
+
+
+func BenchmarkTransformCpf(b *testing.B) {
+	transformer := NewTransformCpf()
+	opts, err := NewTransformCpfOpts(nil,)
 	if err != nil {
 		b.Fatal(err)
 	}

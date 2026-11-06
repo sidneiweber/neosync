@@ -6,6 +6,7 @@ package transformers
 func GetNeosyncTransformers() []NeosyncTransformer {
 	return []NeosyncTransformer{
 		NewTransformCharacterScramble(),
+		NewTransformCpf(),
 		NewTransformE164PhoneNumber(),
 		NewTransformEmail(),
 		NewTransformFirstName(),
@@ -28,6 +29,7 @@ func GetNeosyncGenerators() []NeosyncGenerator {
 			NewGenerateCategorical(),
 			NewGenerateCity(),
 			NewGenerateCountry(),
+			NewGenerateCpf(),
 			NewGenerateEmail(),
 			NewGenerateFirstName(),
 			NewGenerateFloat64(),

@@ -815,6 +815,18 @@ func computeMutationFunction(
 			return "", err
 		}
 		return opts.BuildBloblangString(formattedColPath), nil
+	case *mgmtv1alpha1.TransformerConfig_GenerateCpfConfig:
+		opts, err := transformers.NewGenerateCpfOptsFromConfig(cfg.GenerateCpfConfig)
+		if err != nil {
+			return "", err
+		}
+		return opts.BuildBloblangString(), nil
+	case *mgmtv1alpha1.TransformerConfig_TransformCpfConfig:
+		opts, err := transformers.NewTransformCpfOptsFromConfig(cfg.TransformCpfConfig)
+		if err != nil {
+			return "", err
+		}
+		return opts.BuildBloblangString(formattedColPath), nil
 	case *mgmtv1alpha1.TransformerConfig_TransformScrambleIdentityConfig:
 		token := buildScrambleIdentityToken(col)
 		opts, err := transformers.NewTransformIdentityScrambleOptsFromConfigWithToken(token)

@@ -811,6 +811,32 @@ func InitializeTransformerByConfigType(
 				return transform(value, opts)
 			},
 		}, nil
+	case *mgmtv1alpha1.TransformerConfig_GenerateCpfConfig:
+		config := transformerConfig.GetGenerateCpfConfig()
+		opts, err := transformers.NewGenerateCpfOptsFromConfig(config)
+		if err != nil {
+			return nil, err
+		}
+		generate := transformers.NewGenerateCpf().Generate
+		return &TransformerExecutor{
+			Opts: opts,
+			Mutate: func(value any, opts any) (any, error) {
+				return generate(opts)
+			},
+		}, nil
+	case *mgmtv1alpha1.TransformerConfig_TransformCpfConfig:
+		config := transformerConfig.GetTransformCpfConfig()
+		opts, err := transformers.NewTransformCpfOptsFromConfig(config)
+		if err != nil {
+			return nil, err
+		}
+		transform := transformers.NewTransformCpf().Transform
+		return &TransformerExecutor{
+			Opts: opts,
+			Mutate: func(value any, opts any) (any, error) {
+				return transform(value, opts)
+			},
+		}, nil
 
 	default:
 		return nil, fmt.Errorf("unsupported transformer: %T", typedCfg)
