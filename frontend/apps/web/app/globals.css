@@ -52,6 +52,11 @@
 
   --breakpoint-custom: 1290px;
 
+  /* MaskSync type: Inter for UI, Space Grotesk for headings, JetBrains Mono for data and code */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
   @keyframes accordion-down {
     from {
       height: 0;
@@ -68,6 +73,27 @@
       height: 0;
     }
   }
+}
+
+/* MaskSync neutrals (Paper → Ink). Overrides Tailwind's gray scale used across the app. */
+@theme {
+  --color-gray-50: #f5f6f3;
+  --color-gray-100: #eceeec;
+  --color-gray-200: #dde1dd;
+  --color-gray-300: #c2c8c3;
+  --color-gray-400: #a9b0b5;
+  --color-gray-500: #5e666c;
+  --color-gray-600: #3a4146;
+  --color-gray-700: #2e3439;
+  --color-gray-800: #262b2f;
+  --color-gray-900: #161a1d;
+  --color-gray-950: #0f1214;
+
+  /* Semantic brand colors: lime = safe/anonymized data, coral = sensitive data (PII). */
+  --color-lime: #c6f36b;
+  --color-moss: #4a760d;
+  --color-coral: #ff7a59;
+  --color-ember: #b8401f;
 }
 
 @utility container {
@@ -109,79 +135,81 @@
 }
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(222.2 84% 4.9%);
+  /* Light theme: Paper background, Ink text and actions */
+  --background: #f5f6f3;
+  --foreground: #0f1214;
 
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222.2 84% 4.9%);
-  --card-border: hsl(213 4% 80%);
+  --card: #ffffff;
+  --card-foreground: #0f1214;
+  --card-border: #dde1dd;
 
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(222.2 84% 4.9%);
+  --popover: #ffffff;
+  --popover-foreground: #0f1214;
 
-  --primary: hsl(222.2 47.4% 11.2%);
-  --primary-foreground: hsl(210 40% 98%);
+  --primary: #0f1214;
+  --primary-foreground: #f5f6f3;
 
-  --secondary: hsl(210 40% 96.1%);
-  --secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --secondary: #eceeec;
+  --secondary-foreground: #0f1214;
 
-  --muted: hsl(210 40% 96.1%);
-  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --muted: #eceeec;
+  --muted-foreground: #5e666c;
 
-  --accent: hsl(210 40% 96.1%);
-  --accent-foreground: hsl(222.2 47.4% 11.2%);
+  --accent: #eceeec;
+  --accent-foreground: #0f1214;
 
-  --destructive: hsl(0 84.2% 60.2%);
-  --destructive-foreground: hsl(210 40% 98%);
+  --destructive: #b8401f;
+  --destructive-foreground: #f5f6f3;
 
   --warning: hsl(47 69% 75%);
-  --warning-foreground: hsl(247 88% 17%);
+  --warning-foreground: #0f1214;
 
-  --border: hsl(214.3 31.8% 91.4%);
-  --input: hsl(214.3 31.8% 91.4%);
-  --ring: hsl(222.2 84% 4.9%);
+  --border: #dde1dd;
+  --input: #c2c8c3;
+  --ring: #4a760d;
 
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 
-  --badge: hsl(240 0% 96%);
-  --badge-border: hsl(213 0% 91%);
+  --badge: #eceeec;
+  --badge-border: #dde1dd;
 }
 
 .dark {
-  --background: hsl(240 9% 13%);
-  --foreground: hsl(210 40% 98%);
+  /* Dark theme (default): Ink background, Mask Lime for primary actions */
+  --background: #0f1214;
+  --foreground: #f5f6f3;
 
-  --card: hsl(222.2 84% 4.9%);
-  --card-foreground: hsl(210 40% 98%);
-  --card-border: hsl(213 4% 30%);
+  --card: #161a1d;
+  --card-foreground: #f5f6f3;
+  --card-border: #2e3439;
 
-  --popover: hsl(240 9% 13%);
-  --popover-foreground: hsl(210 40% 98%);
+  --popover: #161a1d;
+  --popover-foreground: #f5f6f3;
 
-  --primary: hsl(217.2 91.2% 49.8%);
-  --primary-foreground: hsl(210 40% 98%);
+  --primary: #c6f36b;
+  --primary-foreground: #0f1214;
 
-  --secondary: hsl(217.2 32.6% 17.5%);
-  --secondary-foreground: hsl(210 40% 98%);
+  --secondary: #262b2f;
+  --secondary-foreground: #f5f6f3;
 
-  --muted: hsl(217.2 32.6% 17.5%);
-  --muted-foreground: hsl(215 20.2% 65.1%);
+  --muted: #262b2f;
+  --muted-foreground: #a9b0b5;
 
-  --accent: hsl(217.2 32.6% 17.5%);
-  --accent-foreground: hsl(210 40% 98%);
+  --accent: #262b2f;
+  --accent-foreground: #f5f6f3;
 
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(210 40% 98%);
+  --destructive: #b8401f;
+  --destructive-foreground: #f5f6f3;
 
   --warning: hsl(37 87% 32%);
-  --warning-foreground: hsl(210 40% 98%);
+  --warning-foreground: #f5f6f3;
 
-  --border: hsl(217.2 32.6% 17.5%);
-  --input: hsl(217.2 11% 25%);
-  --ring: hsl(212.7 11.8% 40.9%);
+  --border: #2e3439;
+  --input: #3a4146;
+  --ring: #c6f36b;
 
-  --badge: hsl(240 9% 20%);
-  --badge-border: hsl(212.7 11.8% 40.9%);
+  --badge: #262b2f;
+  --badge-border: #3a4146;
 }
 
 @layer base {
@@ -190,6 +218,18 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
   }
 }
 

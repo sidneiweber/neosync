@@ -3,7 +3,6 @@
 import Link from 'next/link';
 
 import { cn } from '@/libs/utils';
-import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
 import { useAccount } from '../providers/account-provider';
 import { MainLogo } from './MainLogo';
@@ -15,13 +14,12 @@ export function MainNav({
 }: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
   const { account } = useAccount();
-  const { resolvedTheme } = useTheme();
   const accountName = account?.name ?? 'personal';
 
   return (
     <div className="mr-4 hidden lg:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">
-        <MainLogo bg={resolvedTheme === 'dark' ? 'white' : '#272F30'} />
+        <MainLogo />
       </Link>
       <nav
         className={cn('flex items-center space-x-4 lg:space-x-6', className)}

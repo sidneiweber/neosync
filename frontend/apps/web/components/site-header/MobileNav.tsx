@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/libs/utils';
-import { useTheme } from 'next-themes';
 import { useAccount } from '../providers/account-provider';
 import { MainLogo } from './MainLogo';
 import { getPathNameHighlight } from './util';
@@ -19,7 +18,6 @@ export function MobileNav() {
   const [open, setOpen] = React.useState(false);
   const { account } = useAccount();
   const pathname = usePathname();
-  const { resolvedTheme } = useTheme();
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -38,7 +36,7 @@ export function MobileNav() {
           className="flex items-center"
           onOpenChange={setOpen}
         >
-          <MainLogo bg={resolvedTheme === 'dark' ? 'white' : '#272F30'} />;
+          <MainLogo />
         </MobileLink>
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6 pt-6 w-40">
           <div className="flex flex-col space-y-3">

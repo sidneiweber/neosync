@@ -14,7 +14,9 @@ import { DataTableRowActions } from './data-table-row-actions';
 const JOB_STATUS = [
   {
     value: JobStatus.ENABLED,
-    badge: <Badge className="bg-blue-600">Enabled</Badge>,
+    badge: (
+      <Badge className="bg-lime text-gray-950 hover:bg-lime/90">Enabled</Badge>
+    ),
   },
   {
     value: JobStatus.DISABLED,
@@ -22,7 +24,7 @@ const JOB_STATUS = [
   },
   {
     value: JobStatus.PAUSED,
-    badge: <Badge className="bg-gray-600">Paused</Badge>,
+    badge: <Badge className="bg-gray-600 text-gray-50">Paused</Badge>,
   },
   {
     value: JobStatus.UNSPECIFIED,

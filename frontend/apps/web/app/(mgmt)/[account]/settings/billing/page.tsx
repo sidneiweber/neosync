@@ -255,7 +255,7 @@ function Plans({
                 <div className=" items-center flex flex-row gap-4">
                   <div className="text-2xl font-semibold">{plan.name}</div>
                   {plan.name == 'Team' && (
-                    <Badge className="bg-blue-700 hover:bg-blue-700">
+                    <Badge className="bg-blue-700 text-gray-50 hover:bg-blue-700">
                       Most Popular
                     </Badge>
                   )}
