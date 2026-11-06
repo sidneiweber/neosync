@@ -25,6 +25,17 @@ declare namespace neosync {
 	declare function transformCharacterScramble(value: any, options: TransformCharacterScrambleOptions): any;
 
 	
+	export interface TransformCpfOptions {
+		/** An optional seed value used to generate deterministic outputs. */
+		seed?: number;
+	}
+
+  /**
+   * Transforms an existing Brazilian CPF into a different, valid CPF. Keeps the input format: if the input contains dots or a hyphen the output is formatted as xxx.xxx.xxx-xx, otherwise only the 11 digits are returned.
+   */
+	declare function transformCpf(value: any, options: TransformCpfOptions): any;
+
+	
 	export interface TransformE164PhoneNumberOptions {
 		/** Whether the original length of the input data should be preserved during transformation. If set to true, the transformation logic will ensure that the output data has the same length as the input data. */
 		preserveLength?: boolean;
@@ -278,6 +289,19 @@ declare namespace neosync {
    * Randomly selects a country and by default, returns it as a 2-letter country code.
    */
 	declare function generateCountry(options: GenerateCountryOptions): any;
+
+	
+	export interface GenerateCpfOptions {
+		/** Whether to format the CPF as xxx.xxx.xxx-xx. If false, returns only the 11 digits. */
+		formatted?: boolean;
+		/** An optional seed value used to generate deterministic outputs. */
+		seed?: number;
+	}
+
+  /**
+   * Generates a random, valid Brazilian CPF (Cadastro de Pessoas Físicas) number with correct check digits.
+   */
+	declare function generateCpf(options: GenerateCpfOptions): any;
 
 	
 	export interface GenerateEmailOptions {

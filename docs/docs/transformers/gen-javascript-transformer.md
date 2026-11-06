@@ -60,6 +60,38 @@ const newValue = neosync.transformCharacterScramble(value, {
 
 
 <!--
+source: transform_cpf.go
+-->
+
+### transformCpf
+
+Transforms an existing Brazilian CPF into a different, valid CPF. Keeps the input format: if the input contains dots or a hyphen the output is formatted as xxx.xxx.xxx-xx, otherwise only the 11 digits are returned.
+
+**Parameters**
+
+**Value**
+Type: Any
+Description: Value that will be transformed
+
+**Config**
+
+| Field    | Type | Default | Required | Description |
+| -------- | ---- | ------- | -------- | ----------- |
+| seed | int64 |  | false | An optional seed value used to generate deterministic outputs.<br/>
+
+**Example**
+
+```javascript
+
+const newValue = neosync.transformCpf(value, {
+	seed: 1, 
+});
+
+```
+<br/>
+
+
+<!--
 source: transform_e164_phone_number.go
 -->
 
@@ -649,6 +681,37 @@ Randomly selects a country and by default, returns it as a 2-letter country code
 
 const newValue = neosync.generateCountry({
 	generateFullName: false,
+	seed: 1, 
+});
+
+```
+<br/>
+
+
+<!--
+source: generate_cpf.go
+-->
+
+### generateCpf
+
+Generates a random, valid Brazilian CPF (Cadastro de Pessoas Físicas) number with correct check digits.
+
+**Parameters**
+
+**Config**
+
+| Field    | Type | Default | Required | Description |
+| -------- | ---- | ------- | -------- | ----------- |
+| formatted | bool | true | false | Whether to format the CPF as xxx.xxx.xxx-xx. If false, returns only the 11 digits.
+| seed | int64 |  | false | An optional seed value used to generate deterministic outputs.
+<br/>
+
+**Example**
+
+```javascript
+
+const newValue = neosync.generateCpf({
+	formatted: true,
 	seed: 1, 
 });
 

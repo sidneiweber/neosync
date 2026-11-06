@@ -22,6 +22,7 @@ Neosync ships with 40+ System Transformers to give you an easy way to get starte
 | [Generate Email](/transformers/system#generate-email)                             | string  | Generates a new randomized email address.                                                                                                                                                     |
 | [Generate Boolean](/transformers/system#generate-bool)                            | boolean | Generates a boolean value at random.                                                                                                                                                          |
 | [Generate Card Number](/transformers/system#generate-card-number)                 | int64   | Generates a card number.                                                                                                                                                                      |
+| [Generate CPF](/transformers/system#generate-cpf)                                 | string  | Generates a valid Brazilian CPF with correct check digits, formatted as `xxx.xxx.xxx-xx` by default.                                                                                          |
 | [Generate City](/transformers/system#generate-city)                               | string  | Randomly selects a city from a list of predefined US cities.                                                                                                                                  |
 | [Generate Country](/transformers/system#generate-country)                         | string  | Randomly selects a country and returns it as a 2-letter country code or the full country name                                                                                                 |
 | [Generate E164 Phone Number](/transformers/system#generate-e164-phone-number)     | string  | Generates a Generate phone number in e164 format.                                                                                                                                             |
@@ -57,6 +58,7 @@ Neosync ships with 40+ System Transformers to give you an easy way to get starte
 | [Transform Phone Number](/transformers/system#transform-phone-number)             | string  | Transforms an existing phone number that is typed as a string.                                                                                                                                |
 | [Transform String](/transformers/system#transform-string)                         | string  | Transforms an existing string value.                                                                                                                                                          |
 | [Transform Character Scramble](/transformers/system#transform-character-scramble) | string  | Transforms an existing string value by scrambling the characters while maintaining the format.                                                                                                |
+| [Transform CPF](/transformers/system#transform-cpf)                               | string  | Transforms an existing Brazilian CPF into a different valid CPF, keeping the input format.                                                                                                    |
 | [Passthrough](/transformers/system#passthrough)                                   | string  | Passes the input value through to the destination with no changes.                                                                                                                            |
 | [Null](/transformers/system#generate-null)                                        | string  | Inserts a `null` string instead of the source value.                                                                                                                                          |
 | [Use Column Default](/transformers/system#generate-default)                       | any     | Applies the predefined default value of a column as specified in the SQL database schema                                                                                                      |
@@ -159,6 +161,23 @@ Randomly selects a country and by default, returns it as a 2-letter country code
 | -------------- |
 | Canada         |
 | AL             |
+
+### Generate CPF\{#generate-cpf}
+
+Generates a valid Brazilian CPF (Cadastro de Pessoas Físicas). The last two digits are check digits calculated with the official mod 11 algorithm, so the output passes CPF validation. Sequences of a single repeated digit (such as `111.111.111-11`) are never generated.
+
+**Configurations**
+
+| Name      | Description                                                                                   | Default | Example Output |
+| --------- | --------------------------------------------------------------------------------------------- | ------- | -------------- |
+| Formatted | Set to true to format the CPF as `xxx.xxx.xxx-xx`. If false, only the 11 digits are returned. | true    | 291.417.776-38 |
+
+**Examples**
+
+| Formatted | Example Output |
+| --------- | -------------- |
+| True      | 291.417.776-38 |
+| False     | 01152449303    |
 
 ### Generate E164 Phone Number\{#generate-e164-phone-number}
 
@@ -753,6 +772,21 @@ Anonymizes and transforms an existing string value by scrambling the characters 
 |          | helloworld    | didlenfioq     |
 | ello     | Hello World!  | Hjiqs World!   |
 | Hello 12 | Hello 1234    | Praji 2834     |
+
+### Transform CPF\{#transform-cpf}
+
+Transforms an existing Brazilian CPF into a different, valid CPF. The output keeps the input format: if the input contains dots or a hyphen, the output is formatted as `xxx.xxx.xxx-xx`; otherwise only the 11 digits are returned. Empty values are returned as null.
+
+**Configurations**
+
+There are no configurations for this transformer.
+
+**Examples**
+
+| Original Value | Example Output |
+| -------------- | -------------- |
+| 529.982.247-25 | 398.259.791-94 |
+| 52998224725    | 01152449303    |
 
 ### Transform Scramble Identity\{#transform-scramble-identity}
 

@@ -70,7 +70,7 @@ export default function JobRunStatus(props: Props): ReactElement {
         <div className={cn(sharedContainerClassName, containerClassName)}>
           <Badge
             className={cn(
-              'bg-blue-600 hover:bg-blue-500',
+              'bg-lime text-gray-950 hover:bg-lime/90',
               sharedBadgeClassName,
               badgeClassName
             )}
@@ -84,7 +84,7 @@ export default function JobRunStatus(props: Props): ReactElement {
         <div className={cn(sharedContainerClassName, containerClassName)}>
           <Badge
             className={cn(
-              'bg-purple-600  hover:bg-purple-500',
+              'bg-purple-600 text-gray-50 hover:bg-purple-500',
               sharedBadgeClassName,
               badgeClassName
             )}
@@ -98,7 +98,7 @@ export default function JobRunStatus(props: Props): ReactElement {
         <div className={cn(sharedContainerClassName, containerClassName)}>
           <Badge
             className={cn(
-              'bg-gray-600  hover:bg-gray-500',
+              'bg-gray-600 text-gray-50 hover:bg-gray-500',
               sharedBadgeClassName,
               badgeClassName
             )}
@@ -112,7 +112,7 @@ export default function JobRunStatus(props: Props): ReactElement {
         <div className={cn(sharedContainerClassName, containerClassName)}>
           <Badge
             className={cn(
-              'bg-gray-600  hover:bg-gray-500',
+              'bg-gray-600 text-gray-50 hover:bg-gray-500',
               sharedBadgeClassName,
               badgeClassName
             )}
@@ -126,7 +126,7 @@ export default function JobRunStatus(props: Props): ReactElement {
         <div className={cn(sharedContainerClassName, containerClassName)}>
           <Badge
             className={cn(
-              'bg-yellow-600  hover:bg-yellow-500',
+              'bg-yellow-600 text-gray-50 hover:bg-yellow-500',
               sharedBadgeClassName,
               badgeClassName
             )}

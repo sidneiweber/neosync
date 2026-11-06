@@ -1759,6 +1759,16 @@
               "name": "TRANSFORMER_SOURCE_TRANSFORM_SCRAMBLE_IDENTITY",
               "number": "51",
               "description": ""
+            },
+            {
+              "name": "TRANSFORMER_SOURCE_GENERATE_CPF",
+              "number": "52",
+              "description": ""
+            },
+            {
+              "name": "TRANSFORMER_SOURCE_TRANSFORM_CPF",
+              "number": "53",
+              "description": ""
             }
           ]
         }
@@ -1997,6 +2007,30 @@
               "ismap": false,
               "isoneof": true,
               "oneofdecl": "_generate_full_name",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "GenerateCpf",
+          "longName": "GenerateCpf",
+          "fullName": "mgmt.v1alpha1.GenerateCpf",
+          "description": "Generates a valid Brazilian CPF (Cadastro de Pessoas Físicas) with correct check digits.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": true,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "formatted",
+              "description": "Whether to format the CPF as xxx.xxx.xxx-xx. Defaults to true. If false, returns only the 11 digits.",
+              "label": "optional",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": true,
+              "oneofdecl": "_formatted",
               "defaultValue": ""
             }
           ]
@@ -3176,6 +3210,17 @@
           ]
         },
         {
+          "name": "TransformCpf",
+          "longName": "TransformCpf",
+          "fullName": "mgmt.v1alpha1.TransformCpf",
+          "description": "Transforms an existing Brazilian CPF into a different valid CPF, keeping the input format.",
+          "hasExtensions": false,
+          "hasFields": false,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": []
+        },
+        {
           "name": "TransformE164PhoneNumber",
           "longName": "TransformE164PhoneNumber",
           "fullName": "mgmt.v1alpha1.TransformE164PhoneNumber",
@@ -4246,6 +4291,30 @@
               "type": "TransformScrambleIdentity",
               "longType": "TransformScrambleIdentity",
               "fullType": "mgmt.v1alpha1.TransformScrambleIdentity",
+              "ismap": false,
+              "isoneof": true,
+              "oneofdecl": "config",
+              "defaultValue": ""
+            },
+            {
+              "name": "generate_cpf_config",
+              "description": "Generates a valid Brazilian CPF.",
+              "label": "",
+              "type": "GenerateCpf",
+              "longType": "GenerateCpf",
+              "fullType": "mgmt.v1alpha1.GenerateCpf",
+              "ismap": false,
+              "isoneof": true,
+              "oneofdecl": "config",
+              "defaultValue": ""
+            },
+            {
+              "name": "transform_cpf_config",
+              "description": "Transforms an existing Brazilian CPF into a different valid CPF.",
+              "label": "",
+              "type": "TransformCpf",
+              "longType": "TransformCpf",
+              "fullType": "mgmt.v1alpha1.TransformCpf",
               "ismap": false,
               "isoneof": true,
               "oneofdecl": "config",

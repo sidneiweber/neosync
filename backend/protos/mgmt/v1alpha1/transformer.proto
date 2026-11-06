@@ -169,6 +169,8 @@ enum TransformerSource {
   TRANSFORMER_SOURCE_GENERATE_IP_ADDRESS = 49;
   TRANSFORMER_SOURCE_TRANSFORM_UUID = 50;
   TRANSFORMER_SOURCE_TRANSFORM_SCRAMBLE_IDENTITY = 51;
+  TRANSFORMER_SOURCE_GENERATE_CPF = 52;
+  TRANSFORMER_SOURCE_TRANSFORM_CPF = 53;
 }
 
 enum TransformerDataType {
@@ -264,6 +266,10 @@ message TransformerConfig {
     TransformUuid transform_uuid_config = 47;
     // Scrambles an integer while keeping it unique.
     TransformScrambleIdentity transform_scramble_identity_config = 48;
+    // Generates a valid Brazilian CPF.
+    GenerateCpf generate_cpf_config = 49;
+    // Transforms an existing Brazilian CPF into a different valid CPF.
+    TransformCpf transform_cpf_config = 50;
   }
 }
 
@@ -641,6 +647,15 @@ message GenerateIpAddress {
 }
 
 message TransformUuid {}
+
+// Generates a valid Brazilian CPF (Cadastro de Pessoas Físicas) with correct check digits.
+message GenerateCpf {
+  // Whether to format the CPF as xxx.xxx.xxx-xx. Defaults to true. If false, returns only the 11 digits.
+  optional bool formatted = 1;
+}
+
+// Transforms an existing Brazilian CPF into a different valid CPF, keeping the input format.
+message TransformCpf {}
 
 // Service that manages system and user defined transformers
 service TransformersService {
